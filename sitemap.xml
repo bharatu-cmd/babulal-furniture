@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.babulalfurniture.com/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/living-room-hero.webp</image:loc>
+      <image:title>Babulal Furniture Custom Solid Wood Living Space</image:title>
+      <image:caption>Bespoke solid wood furniture atelier in Rajasthan, India</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/comfortable-jhula.webp</image:loc>
+      <image:title>Contemporary Comfort Wooden Jhula</image:title>
+      <image:caption>Solid Sagwan teakwood indoor swing with brass chains</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/dining-table.webp</image:loc>
+      <image:title>Elegant Marble Dining Table</image:title>
+      <image:caption>Solid timber dining table with Italian marble top</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/modern-tv-unit.webp</image:loc>
+      <image:title>Contemporary Solid Wood TV Unit</image:title>
+      <image:caption>Solid timber entertainment console with fluted slatted accents</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/premium-temple.webp</image:loc>
+      <image:title>Gayatri Mantra Sacred Wooden Mandir</image:title>
+      <image:caption>Handcrafted sacred wooden temple with brass bells and backlight</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/modern-luxury-bed.webp</image:loc>
+      <image:title>Modern Luxury High-Back Bed</image:title>
+      <image:caption>Solid teakwood frame with vertical upholstered fluted headboard</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/premium-temple-door.webp</image:loc>
+      <image:title>Hand-Carved Royal Temple Door</image:title>
+      <image:caption>Solid teakwood temple and pooja room entrance door</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.babulalfurniture.com/assets/images/wall-panel-tree-of-life.webp</image:loc>
+      <image:title>Tree of Life Hand-Carved Wood Wall Panel</image:title>
+      <image:caption>Intricate architectural wall carving in seasoned hardwood</image:caption>
+    </image:image>
+  </url>
+</urlset>

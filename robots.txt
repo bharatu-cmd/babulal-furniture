@@ -1,0 +1,16 @@
+# Babulal Furniture Robots Configuration
+# Production Domain: https://www.babulalfurniture.com/
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /css/
+Allow: /data/
+Allow: /js/
+
+# Disallow internal development scratch directories
+Disallow: /scratch/
+Disallow: /.*
+
+# XML Sitemap
+Sitemap: https://www.babulalfurniture.com/sitemap.xml
