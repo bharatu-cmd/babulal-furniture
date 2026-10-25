@@ -1,21 +1,22 @@
 /**
- * BABULAL FURNITURE — Component & Interaction Controller
- * Editorial Architectural Reset
+ * BABULAL FURNITURE — V2 Master Redesign Controller
+ * Luxury Furniture Atelier & Showroom Experience
  * Zero-dependency Vanilla JS with Full Accessibility & SEO Alignment
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileNav();
-  renderCategories();
-  renderFeaturedProducts();
-  renderGallery();
+  renderFeaturedCollection();
+  renderCategoryGrid();
+  renderFullCatalogue();
   initModals();
+  initLightbox();
   initWhatsAppLinks();
 });
 
 /* ==========================================================================
-   1. HEADER SCROLL & SPY NAVIGATION
+   1. HEADER SCROLL & NAVIGATION
    ========================================================================== */
 function initHeader() {
   const header = document.querySelector('.site-header');
@@ -96,31 +97,45 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   3. CATEGORY DISCOVERY (ARCHITECTURAL IMAGE TILES)
+   3. FEATURED COLLECTION SECTION (Immediately After Hero)
    ========================================================================== */
-function renderCategories() {
-  const container = document.getElementById('categoriesGrid');
-  if (!container || typeof BabulalCategories === 'undefined') return;
+function renderFeaturedCollection() {
+  const container = document.getElementById('featuredGrid');
+  if (!container || typeof BabulalProducts === 'undefined') return;
 
-  container.innerHTML = BabulalCategories.map(cat => `
-    <article class="category-editorial-card" onclick="filterByCategoryId('${cat.id}')" role="button" tabindex="0" aria-label="Explore ${cat.name} Collection">
-      <picture>
-        <source srcset="${cat.image}" type="image/webp">
-        <img class="category-editorial-img" src="${cat.imageFallback}" alt="${cat.name} handcrafted by Babulal Furniture" loading="lazy" width="600" height="450">
-      </picture>
-      <div class="category-editorial-overlay">
-        <span class="category-card-count">${cat.count} PIECES</span>
-        <h3 class="category-card-title">${cat.name.toUpperCase()}</h3>
-        <span class="category-card-action">
-          <span>EXPLORE PIECES</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
-        </span>
+  // Filter featured products or top 6 pieces
+  const featured = BabulalProducts.filter(p => p.featured).slice(0, 6);
+  const displayList = featured.length >= 4 ? featured : BabulalProducts.slice(0, 6);
+
+  container.innerHTML = displayList.map(prod => `
+    <article class="product-card" data-id="${prod.id}" onclick="openProductModal('${prod.id}')" tabindex="0" role="button" aria-label="View ${prod.name}">
+      <div class="product-card-media">
+        <picture>
+          <source srcset="${prod.image}" type="image/webp">
+          <img class="product-card-img" src="${prod.imageFallback}" alt="${prod.name} handcrafted by Babulal Furniture" loading="lazy" width="600" height="450">
+        </picture>
+        <span class="product-card-badge">FEATURED</span>
+        <button class="product-quick-view-btn" onclick="event.stopPropagation(); openLightboxByProduct('${prod.id}')" aria-label="Enlarge image for ${prod.name}">
+          <span class="material-symbols-outlined">zoom_in</span>
+        </button>
+      </div>
+      <div class="product-card-body">
+        <span class="product-card-kicker">${prod.category.toUpperCase()}</span>
+        <h3 class="product-card-title">${prod.name}</h3>
+        <p class="product-card-desc">${prod.materials}</p>
+        <div class="product-card-footer">
+          <span class="product-card-pricing">Workshop Direct</span>
+          <span class="product-card-link">
+            <span>VIEW DETAILS</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </span>
+        </div>
       </div>
     </article>
   `).join('');
 
   // Keyboard accessibility
-  container.querySelectorAll('.category-editorial-card').forEach(card => {
+  container.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -131,16 +146,62 @@ function renderCategories() {
 }
 
 /* ==========================================================================
-   4. FEATURED PRODUCTS & FILTER SYSTEM
+   4. SHOP BY CATEGORY SECTION
    ========================================================================== */
-let activeFilter = 'all';
+function renderCategoryGrid() {
+  const container = document.getElementById('categoriesGrid');
+  if (!container || typeof BabulalCategories === 'undefined') return;
 
-function renderFeaturedProducts() {
-  const grid = document.getElementById('productsGrid');
-  const filterBar = document.getElementById('productFilterBar');
+  container.innerHTML = BabulalCategories.map(cat => `
+    <article class="category-card" onclick="filterByCategoryId('${cat.id}')" role="button" tabindex="0" aria-label="Explore ${cat.name} Collection">
+      <div class="category-card-media">
+        <picture>
+          <source srcset="${cat.image}" type="image/webp">
+          <img class="category-card-img" src="${cat.imageFallback}" alt="${cat.name} handcrafted by Babulal Furniture" loading="lazy" width="600" height="450">
+        </picture>
+        <div class="category-card-overlay">
+          <span class="category-card-count">${cat.count} PIECES</span>
+          <h3 class="category-card-title">${cat.name.toUpperCase()}</h3>
+          <p class="category-card-desc">${cat.description}</p>
+          <span class="category-card-action">
+            <span>EXPLORE PIECES</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </span>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  // Keyboard accessibility
+  container.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+}
+
+window.filterByCategoryId = function(categoryId) {
+  setProductFilter(categoryId);
+  const catalogueSection = document.getElementById('catalogue');
+  if (catalogueSection) {
+    catalogueSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
+/* ==========================================================================
+   5. COMPLETE PRODUCT CATALOGUE & FILTER SYSTEM (2 Per Row on Mobile!)
+   ========================================================================== */
+let activeCatalogueFilter = 'all';
+
+function renderFullCatalogue() {
+  const grid = document.getElementById('catalogueGrid');
+  const filterBar = document.getElementById('catalogueFilterBar');
   if (!grid || typeof BabulalProducts === 'undefined') return;
 
-  // Initialize Filter Bar Pills Once
+  // Initialize Filter Bar Tabs Once
   if (filterBar && filterBar.children.length === 0) {
     const pills = [
       { id: 'all', label: 'All Collections' },
@@ -154,33 +215,37 @@ function renderFeaturedProducts() {
     ];
 
     filterBar.innerHTML = pills.map(p => `
-      <button class="filter-tab ${p.id === activeFilter ? 'active' : ''}" data-filter="${p.id}" onclick="setProductFilter('${p.id}')">
+      <button class="filter-tab ${p.id === activeCatalogueFilter ? 'active' : ''}" data-filter="${p.id}" onclick="setProductFilter('${p.id}')">
         ${p.label}
       </button>
     `).join('');
   }
 
   // Filter products
-  const productsToDisplay = activeFilter === 'all'
+  const productsToDisplay = activeCatalogueFilter === 'all'
     ? BabulalProducts
-    : BabulalProducts.filter(p => p.categoryId === activeFilter);
+    : BabulalProducts.filter(p => p.categoryId === activeCatalogueFilter);
 
-  let productCardsHTML = productsToDisplay.map(prod => `
-    <article class="product-editorial-card" data-id="${prod.id}" onclick="openProductModal('${prod.id}')" tabindex="0" role="button" aria-label="View specifications for ${prod.name}">
-      <div class="product-editorial-media">
+  let cardsHTML = productsToDisplay.map(prod => `
+    <article class="product-card" data-id="${prod.id}" onclick="openProductModal('${prod.id}')" tabindex="0" role="button" aria-label="View specifications for ${prod.name}">
+      <div class="product-card-media">
         <picture>
           <source srcset="${prod.image}" type="image/webp">
-          <img class="product-editorial-img" src="${prod.imageFallback}" alt="${prod.name} - Babulal Furniture" loading="lazy" width="600" height="450">
+          <img class="product-card-img" src="${prod.imageFallback}" alt="${prod.name} handcrafted by Babulal Furniture" loading="lazy" width="600" height="450">
         </picture>
+        <button class="product-quick-view-btn" onclick="event.stopPropagation(); openLightboxByProduct('${prod.id}')" aria-label="Enlarge image for ${prod.name}">
+          <span class="material-symbols-outlined">zoom_in</span>
+        </button>
       </div>
-      <div class="product-editorial-body">
-        <span class="product-cat-kicker">${prod.category.toUpperCase()}</span>
-        <h3 class="product-card-name">${prod.name}</h3>
+      <div class="product-card-body">
+        <span class="product-card-kicker">${prod.category.toUpperCase()}</span>
+        <h3 class="product-card-title">${prod.name}</h3>
         <p class="product-card-desc">${prod.materials}</p>
-        <div class="product-card-action-bar">
-          <span class="btn-view-details">
+        <div class="product-card-footer">
+          <span class="product-card-pricing">Workshop Direct</span>
+          <span class="product-card-link">
             <span>VIEW DETAILS</span>
-            <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
           </span>
         </div>
       </div>
@@ -189,21 +254,21 @@ function renderFeaturedProducts() {
 
   let totalCardsCount = productsToDisplay.length;
 
-  // If filtered category has 1 or 2 products, append a complementary custom workshop inquiry card to balance the grid
-  if (activeFilter !== 'all' && productsToDisplay.length <= 2) {
-    const activeCatObj = (typeof BabulalCategories !== 'undefined') ? BabulalCategories.find(c => c.id === activeFilter) : null;
+  // Complement small categories with a bespoke inquiry card to maintain visual balance
+  if (activeCatalogueFilter !== 'all' && productsToDisplay.length <= 2) {
+    const activeCatObj = (typeof BabulalCategories !== 'undefined') ? BabulalCategories.find(c => c.id === activeCatalogueFilter) : null;
     const catLabel = activeCatObj ? activeCatObj.name : 'Custom';
     totalCardsCount += 1;
-    productCardsHTML += `
-      <article class="product-editorial-card custom-inquiry-card" onclick="openQuoteModal('Custom ${catLabel} Requirement')" role="button" tabindex="0" aria-label="Request custom ${catLabel} design">
+    cardsHTML += `
+      <article class="product-card custom-inquiry-card" onclick="openQuoteModal('Custom ${catLabel} Requirement')" role="button" tabindex="0" aria-label="Request custom ${catLabel} design">
         <div class="custom-inquiry-body">
-          <span class="product-cat-kicker">CUSTOM WORKSHOP SIZING</span>
-          <h3 class="product-card-name">Made for Your Space</h3>
+          <span class="product-card-kicker">CUSTOM WORKSHOP SIZING</span>
+          <h3 class="product-card-title">Made for Your Space</h3>
           <p class="product-card-desc">Need custom sizing or specific dimensions? We craft bespoke ${catLabel} pieces built to your exact floorplan.</p>
-          <div class="product-card-action-bar">
-            <span class="btn-view-details highlight">
+          <div class="product-card-footer" style="margin-top: auto; padding-top: 1rem;">
+            <span class="product-card-link highlight">
               <span>REQUEST CUSTOM QUOTE</span>
-              <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
+              <span class="material-symbols-outlined">arrow_forward</span>
             </span>
           </div>
         </div>
@@ -211,11 +276,11 @@ function renderFeaturedProducts() {
     `;
   }
 
-  grid.className = 'products-editorial-grid count-' + totalCardsCount;
-  grid.innerHTML = productCardsHTML;
+  grid.className = 'catalogue-products-grid count-' + totalCardsCount;
+  grid.innerHTML = cardsHTML;
 
-  // Keyboard accessibility for product cards
-  grid.querySelectorAll('.product-editorial-card').forEach(card => {
+  // Keyboard accessibility
+  grid.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -226,7 +291,7 @@ function renderFeaturedProducts() {
 }
 
 window.setProductFilter = function(filterId) {
-  activeFilter = filterId;
+  activeCatalogueFilter = filterId;
   document.querySelectorAll('.filter-tab').forEach(tab => {
     if (tab.getAttribute('data-filter') === filterId) {
       tab.classList.add('active');
@@ -234,85 +299,172 @@ window.setProductFilter = function(filterId) {
       tab.classList.remove('active');
     }
   });
-  renderFeaturedProducts();
-};
-
-window.filterByCategoryId = function(catId) {
-  setProductFilter(catId);
-  const section = document.getElementById('products');
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
+  renderFullCatalogue();
 };
 
 /* ==========================================================================
-   5. EDITORIAL PORTFOLIO GALLERY & LIGHTBOX
+   6. REDESIGNED PRODUCT DETAIL EXPERIENCE (2-Column Desktop & Compact Mobile)
    ========================================================================== */
-let currentLightboxIndex = 0;
-let galleryItemsData = [];
+window.openProductModal = function(productId) {
+  const prod = (typeof BabulalProducts !== 'undefined') ? BabulalProducts.find(p => p.id === productId) : null;
+  if (!prod) return;
 
-function renderGallery() {
-  const grid = document.getElementById('galleryGrid');
-  if (!grid || typeof BabulalProducts === 'undefined') return;
+  const modal = document.getElementById('productModal');
+  const body = document.getElementById('productModalBody');
+  if (!modal || !body) return;
 
-  // Curate 8 high-impact pieces for the editorial portfolio
-  galleryItemsData = [
-    BabulalProducts[0],  // Contemporary Jhula
-    BabulalProducts[7],  // TV Unit
-    BabulalProducts[1],  // Marble Dining
-    BabulalProducts[6],  // Luxury Bed
-    BabulalProducts[11], // Gayatri Mantra Temple
-    BabulalProducts[3],  // Heritage Jhula
-    BabulalProducts[4],  // Nested Coffee Table
-    BabulalProducts[12]  // Peacock Temple
-  ];
+  const whatsappText = encodeURIComponent(
+    `Hello Babulal Furniture, I am interested in ${prod.name}. Please share more details and pricing.`
+  );
+  const whatsappUrl = `https://wa.me/${BabulalConfig.contact.whatsapp}?text=${whatsappText}`;
 
-  grid.innerHTML = galleryItemsData.map((item, idx) => {
-    const isWide = (idx === 1 || idx === 6);
-    return `
-      <div class="gallery-editorial-card ${isWide ? 'wide' : ''}" onclick="openLightbox(${idx})" tabindex="0" role="button" aria-label="View ${item.name} in high-resolution">
-        <picture>
-          <source srcset="${item.image}" type="image/webp">
-          <img class="gallery-editorial-img" src="${item.imageFallback}" alt="${item.name} custom furniture by Babulal Furniture" loading="lazy" width="800" height="600">
-        </picture>
-        <div class="gallery-card-overlay">
-          <h4 class="gallery-overlay-title">${item.name}</h4>
-          <span class="gallery-overlay-cat">${item.category}</span>
+  body.innerHTML = `
+    <div class="product-detail-modal-layout">
+      <!-- Left: Large Uncropped Contained Product Image & Lightbox Trigger -->
+      <div class="product-detail-media-panel">
+        <div class="product-detail-img-container" onclick="openLightboxByProduct('${prod.id}')" title="Click to view full screen">
+          <picture>
+            <source srcset="${prod.image}" type="image/webp">
+            <img class="product-detail-img" src="${prod.imageFallback}" alt="${prod.name} handcrafted by Babulal Furniture" width="800" height="600">
+          </picture>
+          <button class="detail-zoom-hint" aria-label="Enlarge image">
+            <span class="material-symbols-outlined">fullscreen</span>
+            <span>Tap to Enlarge</span>
+          </button>
         </div>
       </div>
-    `;
-  }).join('');
 
-  grid.querySelectorAll('.gallery-editorial-card').forEach(item => {
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        item.click();
-      }
-    });
-  });
+      <!-- Right: Structured Information & Immediate Actions -->
+      <div class="product-detail-info-panel">
+        <div class="product-detail-header">
+          <span class="editorial-tag">${prod.category.toUpperCase()}</span>
+          <h2 class="product-detail-title">${prod.name}</h2>
+          <p class="product-detail-tagline">${prod.tagline || 'Handcrafted solid wood furniture tailored to your space.'}</p>
+        </div>
+
+        <div class="product-detail-box">
+          <div class="detail-spec-row">
+            <span class="detail-spec-label">Craft &amp; Build</span>
+            <span class="detail-spec-value">${prod.materials}</span>
+          </div>
+          <div class="detail-spec-row">
+            <span class="detail-spec-label">Customization</span>
+            <span class="detail-spec-value">${prod.customOptions}</span>
+          </div>
+          <div class="detail-spec-row">
+            <span class="detail-spec-label">Pricing</span>
+            <span class="detail-spec-value highlight">Direct Workshop Pricing</span>
+          </div>
+        </div>
+
+        <div class="product-detail-specs-list">
+          <h4 class="specs-heading">Key Specifications</h4>
+          <ul>
+            ${prod.specs.map(s => `
+              <li>
+                <span class="material-symbols-outlined check-icon">check_circle</span>
+                <span>${s}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div class="product-detail-actions">
+          <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-block js-whatsapp-link">
+            <span class="material-symbols-outlined">chat</span>
+            <span>Ask on WhatsApp</span>
+          </a>
+          <div class="detail-secondary-actions">
+            <button class="btn btn-outline-dark" onclick="closeProductModal(); openQuoteModal('${prod.name}')">
+              <span>Request Custom Quote</span>
+            </button>
+            <button class="btn btn-subtle" onclick="closeProductModal()">
+              <span>Back to Catalogue</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeProductModal = function() {
+  const modal = document.getElementById('productModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
+
+/* ==========================================================================
+   7. INTERACTIVE QUOTE MODAL (Direct to WhatsApp)
+   ========================================================================== */
+window.openQuoteModal = function(preselectedProduct = '') {
+  const modal = document.getElementById('quoteModal');
+  if (!modal) return;
+
+  const productInput = document.getElementById('quoteProduct');
+  if (productInput && preselectedProduct) {
+    productInput.value = preselectedProduct;
+  }
+
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeQuoteModal = function() {
+  const modal = document.getElementById('quoteModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
+
+/* ==========================================================================
+   8. PRODUCT IMAGE LIGHTBOX (Dark Elegant Uncropped Fullscreen Viewer)
+   ========================================================================== */
+let lightboxIndex = 0;
+
+function initLightbox() {
+  // ESC key and Arrow keys are handled in initModals
 }
 
+window.openLightboxByProduct = function(productId) {
+  if (typeof BabulalProducts === 'undefined') return;
+  const idx = BabulalProducts.findIndex(p => p.id === productId);
+  if (idx !== -1) {
+    openLightbox(idx);
+  }
+};
+
 window.openLightbox = function(index) {
-  currentLightboxIndex = index;
-  const item = galleryItemsData[index];
-  if (!item) return;
+  if (typeof BabulalProducts === 'undefined' || !BabulalProducts[index]) return;
+  lightboxIndex = index;
+  const prod = BabulalProducts[index];
 
   const modal = document.getElementById('lightboxModal');
   const img = document.getElementById('lightboxImg');
   const title = document.getElementById('lightboxTitle');
   const cat = document.getElementById('lightboxCat');
+  const waBtn = document.getElementById('lightboxWhatsappBtn');
 
-  img.src = item.imageFallback;
-  if (title) title.textContent = item.name;
-  if (cat) cat.textContent = `${item.category} • Handcrafted Solid Timber`;
+  if (!modal || !img) return;
 
-  const whatsappBtn = document.getElementById('lightboxWhatsappBtn');
-  if (whatsappBtn) {
+  img.src = prod.imageFallback;
+  img.alt = prod.name;
+  if (title) title.textContent = prod.name;
+  if (cat) cat.textContent = prod.category.toUpperCase();
+
+  if (waBtn) {
     const text = encodeURIComponent(
-      `Hello Babulal Furniture, I am interested in ${item.name}. Please share more details and pricing.`
+      `Hello Babulal Furniture, I am inquiring about ${prod.name}. Please share more details and pricing.`
     );
-    whatsappBtn.href = `https://wa.me/${BabulalConfig.contact.whatsapp}?text=${text}`;
+    waBtn.href = `https://wa.me/${BabulalConfig.contact.whatsapp}?text=${text}`;
   }
 
   modal.classList.add('active');
@@ -329,17 +481,17 @@ window.closeLightbox = function() {
 };
 
 window.navigateLightbox = function(dir) {
-  let nextIndex = currentLightboxIndex + dir;
-  if (nextIndex < 0) nextIndex = galleryItemsData.length - 1;
-  if (nextIndex >= galleryItemsData.length) nextIndex = 0;
-  openLightbox(nextIndex);
+  if (typeof BabulalProducts === 'undefined') return;
+  let next = lightboxIndex + dir;
+  if (next < 0) next = BabulalProducts.length - 1;
+  if (next >= BabulalProducts.length) next = 0;
+  openLightbox(next);
 };
 
 /* ==========================================================================
-   6. SPECIFICATION MODAL & QUOTE FORM MODAL
+   9. MODALS INIT & QUOTE FORM SUBMISSION
    ========================================================================== */
 function initModals() {
-  // Global ESC key listener
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       const lightbox = document.getElementById('lightboxModal');
@@ -359,7 +511,6 @@ function initModals() {
     }
   });
 
-  // Handle quote form submit directly to WhatsApp
   const quoteForm = document.getElementById('quoteForm');
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
@@ -389,132 +540,26 @@ function initModals() {
   }
 }
 
-window.openProductModal = function(productId) {
-  const prod = BabulalProducts.find(p => p.id === productId);
-  if (!prod) return;
-
-  const modal = document.getElementById('productModal');
-  const body = document.getElementById('productModalBody');
-  if (!modal || !body) return;
-
-  const whatsappText = encodeURIComponent(
-    `Hello Babulal Furniture, I am interested in ${prod.name}. Please share more details and pricing.`
-  );
-  const whatsappUrl = `https://wa.me/${BabulalConfig.contact.whatsapp}?text=${whatsappText}`;
-
-  body.innerHTML = `
-    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
-      <div style="border-radius: var(--radius-sm); overflow: hidden; background: var(--concrete); aspect-ratio: 4/3; border: 1px solid var(--border);">
-        <picture>
-          <source srcset="${prod.image}" type="image/webp">
-          <img src="${prod.imageFallback}" alt="${prod.name} handcrafted by Babulal Furniture" width="600" height="450" style="width: 100%; height: 100%; object-fit: cover;">
-        </picture>
-      </div>
-      <div>
-        <span class="editorial-tag" style="margin-bottom: 0.35rem;">${prod.category.toUpperCase()}</span>
-        <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--ink); letter-spacing: -0.03em;">${prod.name}</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">${prod.tagline || ''}</p>
-        
-        <div style="background: var(--white); padding: 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 1.5rem;">
-          <h4 style="font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 0.65rem;">
-            Materials &amp; Craftsmanship
-          </h4>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.45rem;">
-            <strong style="color: var(--ink);">Build:</strong> ${prod.materials}
-          </p>
-          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;">
-            <strong style="color: var(--ink);">Custom Options:</strong> ${prod.customOptions}
-          </p>
-        </div>
-
-        <div style="margin-bottom: 1.5rem;">
-          <h4 style="font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 0.75rem;">
-            Verified Specifications
-          </h4>
-          <ul style="display: flex; flex-direction: column; gap: 0.5rem; list-style: none;">
-            ${prod.specs.map(s => `
-              <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.88rem; color: var(--text-muted);">
-                <span class="material-symbols-outlined" style="font-size: 16px; color: var(--coral); margin-top: 3px;">check_circle</span>
-                <span>${s}</span>
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-
-        <div style="padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
-          <div>
-            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); display: block; font-weight: 700;">Workshop Pricing</span>
-            <span style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: var(--ink);">${prod.price}</span>
-          </div>
-          <div style="display: flex; gap: 0.75rem;">
-            <button class="btn btn-outline-ink btn-sm" onclick="closeProductModal(); openQuoteModal('${prod.name}')">
-              Get Custom Quote
-            </button>
-            <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-coral btn-sm">
-              <span class="material-symbols-outlined" style="font-size: 16px;">chat</span>
-              <span>Inquire WhatsApp</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  modal.classList.add('active');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeProductModal = function() {
-  const modal = document.getElementById('productModal');
-  if (!modal) return;
-  modal.classList.remove('active');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-};
-
-window.openQuoteModal = function(preselectedProduct = '') {
-  const modal = document.getElementById('quoteModal');
-  if (!modal) return;
-
-  const productInput = document.getElementById('quoteProduct');
-  if (productInput && preselectedProduct) {
-    productInput.value = preselectedProduct;
-  }
-
-  modal.classList.add('active');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeQuoteModal = function() {
-  const modal = document.getElementById('quoteModal');
-  if (!modal) return;
-  modal.classList.remove('active');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-};
-
 /* ==========================================================================
-   7. WHATSAPP & PHONE INTEGRATION
+   10. WHATSAPP & PHONE LINKS
    ========================================================================== */
 function initWhatsAppLinks() {
+  if (typeof BabulalConfig === 'undefined') return;
+
   const generalText = encodeURIComponent(
-    `Hello Babulal Furniture, I am interested in this product. Please share more details.`
+    `Hello Babulal Furniture, I am interested in your handcrafted furniture. Please share more details.`
   );
   const generalUrl = `https://wa.me/${BabulalConfig.contact.whatsapp}?text=${generalText}`;
 
   document.querySelectorAll('.js-whatsapp-link').forEach(link => {
-    link.setAttribute('href', generalUrl);
+    if (!link.getAttribute('href') || link.getAttribute('href').includes('text=Hello')) {
+      link.setAttribute('href', generalUrl);
+    }
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
   });
 
   document.querySelectorAll('.js-phone-link').forEach(link => {
     link.setAttribute('href', `tel:+91${BabulalConfig.contact.phone}`);
-  });
-
-  document.querySelectorAll('.js-alt-phone-link').forEach(link => {
-    link.setAttribute('href', `tel:+91${BabulalConfig.contact.altPhone}`);
   });
 }
