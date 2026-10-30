@@ -9,14 +9,14 @@
    1. DESIGN TOKENS & ROOT VARIABLES
    ========================================================================== */
 :root {
-  /* Luxury Palette */
-  --bg-main: #FDFBF7;
+  /* Luxury Atelier Palette — Warm Cream, Deep Charcoal, Natural Wood Brown, Muted Gold */
+  --bg-main: #F7F5F0;
   --bg-surface: #FFFFFF;
-  --bg-subtle: #F6F3EC;
-  --bg-muted: #EFEAE1;
-  --bg-dark: #171513;
-  --bg-dark-surface: #24201D;
-  --bg-dark-card: #2D2824;
+  --bg-subtle: #EFECE6;
+  --bg-muted: #E5DFD5;
+  --bg-dark: #141210;
+  --bg-dark-surface: #1E1B18;
+  --bg-dark-card: #27231F;
 
   --text-dark: #171513;
   --text-body: #3C3834;
@@ -31,32 +31,41 @@
   --gold-soft: #D9BE95;
   --gold-tint: rgba(184, 154, 106, 0.12);
 
-  --border: #E5DFD5;
-  --border-light: #F0ECE4;
-  --border-dark: rgba(255, 255, 255, 0.12);
-  --border-gold: rgba(184, 154, 106, 0.35);
+  /* Refined, softer hairlines — Anti-boxed feel */
+  --border: rgba(23, 21, 19, 0.08);
+  --border-light: rgba(23, 21, 19, 0.04);
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(184, 154, 106, 0.28);
 
   /* Typography */
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(23, 21, 19, 0.04);
-  --shadow-card: 0 4px 20px rgba(23, 21, 19, 0.06);
-  --shadow-card-hover: 0 16px 36px rgba(23, 21, 19, 0.12);
+  /* Shadows — Subtle, natural elevation */
+  --shadow-sm: 0 2px 8px rgba(23, 21, 19, 0.03);
+  --shadow-card: 0 4px 18px rgba(23, 21, 19, 0.04);
+  --shadow-card-hover: 0 16px 36px rgba(23, 21, 19, 0.08);
   --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.4);
 
-  /* Radii */
-  --radius-xs: 3px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* Radii — Crisp tailored architectural corners */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-full: 9999px;
+
+  /* Spacing System Tokens: 12px / 16px / 24px / 32-40px / 48-64px / 64-96-120px */
+  --space-1: 0.75rem; /* 12px */
+  --space-2: 1rem;    /* 16px */
+  --space-3: 1.5rem;  /* 24px */
+  --space-4: 2.25rem; /* 36px */
+  --space-5: 3.5rem;  /* 56px */
+  --space-6: 5.5rem;  /* 88px */
 
   /* Layout */
   --container-max: 1280px;
-  --header-height: 76px;
-  --topbar-height: 40px;
+  --header-height: 70px;
+  --topbar-height: 38px;
 
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -136,60 +145,61 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .headline-xl {
-  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-size: clamp(3.75rem, 4.4vw, 4.75rem);
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+/* Major Section Headings H2: Strictly calibrated 44–52px desktop, unified across ALL sections */
+.headline-lg {
+  font-size: clamp(2.75rem, 3.2vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
-/* Major Section Headings H2: Balanced, consistent, refined across all sections */
-.headline-lg {
-  font-size: clamp(2.15rem, 2.7vw, 2.65rem);
+.headline-md {
+  font-size: clamp(1.65rem, 2.2vw, 2.15rem);
   font-weight: 600;
-  line-height: 1.18;
+  line-height: 1.25;
   letter-spacing: -0.015em;
 }
 
-.headline-md {
-  font-size: clamp(1.45rem, 2.2vw, 1.95rem);
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
 .headline-sm {
-  font-size: clamp(1.18rem, 1.6vw, 1.45rem);
+  font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
+/* Body Text Hierarchy — 15–17px desktop */
 .body-lg {
-  font-size: 1.02rem;
+  font-size: 1.0625rem; /* 17px */
   line-height: 1.65;
   color: var(--text-muted);
 }
 
 .body-md {
-  font-size: 0.95rem;
+  font-size: 0.9375rem; /* 15px */
   line-height: 1.6;
   color: var(--text-muted);
 }
 
 .body-sm {
-  font-size: 0.86rem;
+  font-size: 0.875rem; /* 14px */
   line-height: 1.55;
   color: var(--text-muted);
 }
 
-/* Editorial Eyebrow Tag */
+/* Editorial Eyebrow Tag — Strictly 10–12px (11px), uppercase, warm muted gold/brown */
 .editorial-tag {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.6875rem; /* 11px */
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--wood-brown);
   margin-bottom: 0.6rem;
@@ -677,9 +687,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-kicker {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.6875rem; /* 11px */
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--wood-brown);
   margin-bottom: 0.75rem;
@@ -690,28 +700,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-kicker::before {
   content: '';
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background-color: var(--gold-accent);
   border-radius: var(--radius-xs);
 }
 
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.65rem, 3.8vw, 3.65rem);
+  font-size: clamp(4rem, 4.4vw, 4.75rem); /* Strictly 64–76px on desktop */
   font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   color: var(--text-dark);
   margin-bottom: 1.25rem;
 }
 
 .hero-lead {
-  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
   line-height: 1.65;
   color: var(--text-muted);
   margin-bottom: 2rem;
-  max-width: 48ch;
+  max-width: 46ch;
 }
 
 .hero-actions {
@@ -815,24 +825,24 @@ h1, h2, h3, h4, h5, h6 {
 /* ==========================================================================
    8. CRITICAL IMAGE DISPLAY & PRODUCT CARDS SYSTEM
    ========================================================================== */
-/* Consistent, uncropped, contained image container */
+/* Consistent, uncropped, contained luxury image container */
 .product-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border: 1px solid rgba(23, 21, 19, 0.07);
+  border-radius: var(--radius-sm);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 16px rgba(23, 21, 19, 0.03);
   cursor: pointer;
   position: relative;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  border-color: var(--gold-accent);
-  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(184, 154, 106, 0.45);
+  box-shadow: 0 16px 36px rgba(23, 21, 19, 0.08);
 }
 
 /* THE CRITICAL IMAGE CONTAINER:
@@ -843,13 +853,13 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: linear-gradient(145deg, #F9F7F2 0%, #EFEAE1 100%);
+  background-color: #F4F1EA;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.85rem;
   overflow: hidden;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid rgba(23, 21, 19, 0.05);
 }
 
 .product-card-img {
@@ -859,7 +869,7 @@ h1, h2, h3, h4, h5, h6 {
   height: auto;
   object-fit: contain;
   object-position: center;
-  filter: drop-shadow(0 6px 14px rgba(23, 21, 19, 0.08));
+  filter: drop-shadow(0 4px 12px rgba(23, 21, 19, 0.07));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -869,26 +879,26 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-card-badge {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 0.65rem;
+  left: 0.65rem;
   background-color: var(--bg-dark);
   color: var(--gold-soft);
-  font-size: 0.65rem;
+  font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  padding: 0.25rem 0.55rem;
+  padding: 0.2rem 0.5rem;
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(184, 154, 106, 0.3);
+  border: 1px solid rgba(184, 154, 106, 0.25);
 }
 
 .product-quick-view-btn {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 0.65rem;
+  right: 0.65rem;
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: var(--radius-xs);
+  background-color: rgba(255, 255, 255, 0.92);
   color: var(--text-dark);
   display: flex;
   align-items: center;
@@ -896,7 +906,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0;
   transform: scale(0.9);
   transition: all var(--transition-fast);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .product-card:hover .product-quick-view-btn {
@@ -911,16 +921,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Card Body */
 .product-card-body {
-  padding: 1.25rem;
+  padding: 1.15rem 1rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .product-card-kicker {
-  font-size: 0.68rem;
+  font-size: 0.6875rem; /* 11px */
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--wood-brown);
   margin-bottom: 0.35rem;
@@ -928,7 +938,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-card-title {
   font-family: var(--font-display);
-  font-size: 1.12rem;
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem); /* Strictly 17–20px desktop */
   font-weight: 600;
   line-height: 1.3;
   color: var(--text-dark);
@@ -947,7 +957,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card-desc {
-  font-size: 0.86rem;
+  font-size: 0.875rem; /* 14px */
   color: var(--text-muted);
   line-height: 1.55;
   margin-bottom: 1.15rem;
@@ -959,15 +969,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-card-footer {
   margin-top: auto;
-  border-top: 1px solid var(--border-light);
-  padding-top: 0.85rem;
+  border-top: 1px solid rgba(23, 21, 19, 0.05);
+  padding-top: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .product-card-pricing {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--wood-brown);
@@ -1019,24 +1029,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .category-card {
   position: relative;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   overflow: hidden;
   background-color: var(--bg-dark);
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  box-shadow: 0 4px 18px rgba(23, 21, 19, 0.06);
+  border: 1px solid rgba(23, 21, 19, 0.06);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .category-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: 0 16px 36px rgba(23, 21, 19, 0.14);
 }
 
 .category-card-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4; /* Taller, grand architectural photography presence */
   overflow: hidden;
 }
 
@@ -1048,14 +1058,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .category-card:hover .category-card-img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .category-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(23, 21, 19, 0.92) 0%, rgba(23, 21, 19, 0.4) 60%, transparent 100%);
-  padding: 1.25rem;
+  background: linear-gradient(to top, rgba(20, 18, 16, 0.94) 0%, rgba(20, 18, 16, 0.45) 55%, transparent 100%);
+  padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1063,27 +1073,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .category-card-count {
-  font-size: 0.68rem;
+  font-size: 0.6875rem; /* 11px */
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   color: var(--gold-soft);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .category-card-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
   font-weight: 600;
   color: var(--text-light);
   line-height: 1.2;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.4rem;
 }
 
 .category-card-desc {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   color: var(--text-light-muted);
-  line-height: 1.4;
-  margin-bottom: 0.65rem;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1094,11 +1104,16 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.72rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gold-soft);
+  transition: transform var(--transition-fast);
+}
+
+.category-card:hover .category-card-action {
+  transform: translateX(3px);
 }
 
 /* ==========================================================================
@@ -1193,19 +1208,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .custom-furniture-title {
   font-family: var(--font-display);
-  font-size: clamp(2.15rem, 2.7vw, 2.65rem);
+  font-size: clamp(2.75rem, 3.2vw, 3.25rem); /* Strictly 44–52px desktop */
   font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
   color: var(--text-light);
 }
 
 .custom-furniture-lead {
-  font-size: 1.02rem;
+  font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--text-light-muted);
   margin-bottom: 2.25rem;
+  max-width: 48ch;
 }
 
 .custom-pillars-grid {
@@ -1216,30 +1232,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .custom-pillar-card {
-  background-color: var(--bg-dark-card);
-  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.35rem 1.25rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-dark);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 2px solid var(--gold-accent); /* Architectural commissioning phase marker */
+  transition: all var(--transition-fast);
+}
+
+.custom-pillar-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(184, 154, 106, 0.35);
+  transform: translateY(-2px);
 }
 
 .custom-pillar-num {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--gold-soft);
   margin-bottom: 0.35rem;
+  letter-spacing: 0.05em;
 }
 
 .custom-pillar-title {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-light);
   margin-bottom: 0.35rem;
 }
 
 .custom-pillar-desc {
-  font-size: 0.88rem;
+  font-size: 0.875rem;
   color: var(--text-light-muted);
   line-height: 1.55;
 }
@@ -1276,109 +1301,176 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(23, 21, 19, 0.08);
+  box-shadow: 0 16px 40px rgba(23, 21, 19, 0.08);
 }
 
 .workshop-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  min-height: 420px;
   object-fit: cover;
+  display: block;
 }
 
 .workshop-caption-badge {
   position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  background-color: rgba(23, 21, 19, 0.9);
+  bottom: 1.25rem;
+  left: 1.25rem;
+  background-color: rgba(20, 18, 16, 0.92);
   color: var(--text-light);
-  padding: 0.65rem 1rem;
+  padding: 0.75rem 1.25rem;
   border-radius: var(--radius-xs);
-  font-size: 0.78rem;
+  font-size: 0.8125rem;
   border: 1px solid var(--border-gold);
+  backdrop-filter: blur(8px);
 }
 
 .workshop-features-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-  margin-top: 2rem;
+  gap: 1.5rem 1.25rem;
+  margin-top: 2.25rem;
 }
 
+/* Unboxed, minimal architectural spec item */
 .workshop-feature-item {
-  padding: 1.15rem;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  padding: 0 0 0 1.15rem;
+  background: none;
+  border: none;
+  border-left: 2px solid var(--gold-accent);
 }
 
 .workshop-feature-item h4 {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 600;
+  color: var(--text-dark);
   margin-bottom: 0.35rem;
 }
 
 .workshop-feature-item p {
-  font-size: 0.88rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.55;
 }
 
 /* ==========================================================================
-   14. WHY BABULAL FURNITURE
+   14. WHY BABULAL FURNITURE — ARCHITECTURAL EDITORIAL HALLMARK GRID
    ========================================================================== */
+.why-hallmark-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: var(--bg-surface);
+  border: 1px solid rgba(23, 21, 19, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(23, 21, 19, 0.04);
+}
+
+.why-hallmark-item {
+  padding: 2.25rem 2rem;
+  border-right: 1px solid rgba(23, 21, 19, 0.06);
+  border-bottom: 1px solid rgba(23, 21, 19, 0.06);
+  transition: background-color var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+}
+
+.why-hallmark-item:nth-child(3n) {
+  border-right: none;
+}
+
+.why-hallmark-item:nth-child(n+4) {
+  border-bottom: none;
+}
+
+.why-hallmark-item:hover {
+  background-color: #FBF9F5;
+}
+
+.why-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.why-item-num {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold-accent);
+  letter-spacing: 0.05em;
+}
+
+.why-item-icon {
+  font-size: 20px;
+  color: var(--wood-brown);
+  opacity: 0.85;
+}
+
+.why-item-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.why-item-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Fallback for legacy class */
 .why-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .why-card {
   background-color: var(--bg-surface);
   padding: 2rem 1.75rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(23, 21, 19, 0.08);
   transition: all var(--transition-fast);
 }
 
-.why-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--wood-brown);
-  box-shadow: var(--shadow-card-hover);
-}
-
 .why-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-xs);
   background-color: var(--bg-subtle);
   color: var(--wood-brown);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.25rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-light);
 }
 
 .why-card-title {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .why-card-desc {
-  font-size: 0.88rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 /* ==========================================================================
    15. STRONG WHATSAPP CTA & DIRECT CONSULTATION BANNER
    ========================================================================== */
 .whatsapp-banner-section {
-  background: linear-gradient(135deg, #24201D 0%, #171513 100%);
+  background: linear-gradient(135deg, #1E1B18 0%, #141210 100%);
   color: var(--text-light);
   border-top: 1px solid var(--border-gold);
   border-bottom: 1px solid var(--border-gold);
@@ -1393,26 +1485,26 @@ h1, h2, h3, h4, h5, h6 {
 
 .whatsapp-banner-text h2 {
   font-family: var(--font-display);
-  font-size: clamp(2.15rem, 2.7vw, 2.65rem);
+  font-size: clamp(2.75rem, 3.2vw, 3.25rem); /* Strictly 44–52px desktop */
   font-weight: 600;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   color: var(--text-light);
   margin-bottom: 0.85rem;
 }
 
 .whatsapp-banner-text p {
-  font-size: 1.05rem;
+  font-size: 1.0625rem;
   color: var(--text-light-muted);
   line-height: 1.65;
   margin-bottom: 1.75rem;
 }
 
 .whatsapp-banner-cta-box {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.04);
   padding: 2rem;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
 }
 
@@ -1438,14 +1530,14 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(37, 211, 102, 0.22);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14), 0 2px 4px rgba(37, 211, 102, 0.18);
   z-index: 95;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .floating-whatsapp-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18), 0 3px 6px rgba(37, 211, 102, 0.25);
 }
 
 .floating-whatsapp-btn:active {
@@ -1453,8 +1545,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .floating-whatsapp-btn svg {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   display: block;
   fill: currentColor;
 }
@@ -1976,24 +2068,33 @@ textarea.form-control {
 /* ==========================================================================
    21. MOBILE PRODUCT CATALOGUE — CRITICAL: 2 PRODUCTS PER ROW
    ========================================================================== */
+/* ==========================================================================
+   21. MOBILE & TABLET RESPONSIVE SYSTEM
+   ========================================================================== */
 @media (max-width: 768px) {
   :root {
-    --header-height: 64px;
+    --header-height: 58px;
   }
 
-  /* Section Headings Consistency on Mobile/Tablet */
+  /* Hero Headline — Tablet: 48–56px */
+  .hero-headline {
+    font-size: clamp(3rem, 4vw, 3.5rem);
+    line-height: 1.08;
+  }
+
+  /* Section Headings Consistency on Tablet: 36–42px */
   .headline-lg,
   .custom-furniture-title,
   .whatsapp-banner-text h2 {
-    font-size: clamp(1.85rem, 5.2vw, 2.25rem);
-    line-height: 1.22;
+    font-size: clamp(2.25rem, 3vw, 2.625rem);
+    line-height: 1.2;
   }
 
   /* CRITICAL REQUIREMENT: Mobile product grid MUST display 2 PRODUCTS PER ROW */
   .featured-products-grid,
   .catalogue-products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
+    gap: 10px;
   }
 
   .catalogue-products-grid.count-1,
@@ -2005,22 +2106,23 @@ textarea.form-control {
   .product-card-media {
     aspect-ratio: 1 / 1;
     padding: 0.6rem;
+    background-color: #F4F1EA;
   }
 
   .product-card-body {
-    padding: 0.85rem 0.75rem;
+    padding: 0.75rem 0.65rem;
   }
 
   .product-card-kicker {
-    font-size: 0.62rem;
+    font-size: 0.625rem;
     margin-bottom: 0.2rem;
   }
 
   .product-card-title {
-    font-size: 0.96rem;
-    line-height: 1.28;
+    font-size: clamp(0.9375rem, 2vw, 1.05rem); /* Strictly 15–17px */
+    line-height: 1.25;
     margin-bottom: 0.25rem;
-    min-height: 2.56em;
+    min-height: 2.5em;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -2032,41 +2134,75 @@ textarea.form-control {
   }
 
   .product-card-footer {
-    padding-top: 0.6rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(23, 21, 19, 0.05);
   }
 
   .product-card-pricing {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
   }
 
   .product-card-link {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
+    gap: 0.25rem;
   }
 
   .product-card-link .material-symbols-outlined {
     font-size: 13px;
   }
 
+  /* Explore By Room — 2 columns on mobile */
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
+    gap: 10px;
+  }
+
+  .category-card-media {
+    aspect-ratio: 1 / 1;
   }
 
   .category-card-overlay {
     padding: 0.85rem;
   }
 
+  .category-card-count {
+    font-size: 0.625rem;
+    margin-bottom: 0.2rem;
+  }
+
   .category-card-title {
     font-size: 0.95rem;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
   }
 
   .category-card-desc {
     display: none;
   }
 
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  .category-card-action {
+    font-size: 0.625rem;
+  }
+
+  /* Why Babulal Hallmark Grid on Tablet */
+  .why-hallmark-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-hallmark-item {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .why-hallmark-item:nth-child(3n) {
+    border-right: 1px solid rgba(23, 21, 19, 0.06);
+  }
+
+  .why-hallmark-item:nth-child(2n) {
+    border-right: none;
+  }
+
+  .why-hallmark-item:nth-child(n+5) {
+    border-bottom: none;
   }
 
   .custom-pillars-grid {
@@ -2076,7 +2212,7 @@ textarea.form-control {
 
   .workshop-features-list {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
   .footer-top-grid {
@@ -2102,36 +2238,95 @@ textarea.form-control {
     padding: 1.5rem 1.25rem;
   }
 
-  /* Refined Floating WhatsApp Button — Mobile 50px, safe-area aware */
+  /* Refined Floating WhatsApp Button — Strictly 48px × 48px Mobile, safe-area aware */
   .floating-whatsapp-btn {
     bottom: calc(18px + env(safe-area-inset-bottom, 0px));
     right: calc(16px + env(safe-area-inset-right, 0px));
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(37, 211, 102, 0.16);
   }
 
   .floating-whatsapp-btn svg {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
   }
 }
 
-@media (max-width: 480px) {
-  /* Hero Headline — Calibrated 42px to 48px across narrow mobile viewports */
+@media (max-width: 560px) {
+  /* Hero Section — Redesigned Compact Spacing so furniture image is immediately visible */
+  .hero-section {
+    padding-top: 1.5rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .hero-kicker {
+    font-size: 0.6875rem; /* 11px */
+    margin-bottom: 0.35rem;
+  }
+
+  /* Hero Headline — Strictly 38px to 44px on mobile viewports */
   .hero-headline {
-    font-size: clamp(2.625rem, 5vw + 1.5rem, 3rem);
-    line-height: 1.12;
+    font-size: clamp(2.375rem, 3.5vw + 1.55rem, 2.75rem);
+    line-height: 1.1;
+    margin-bottom: 0.65rem;
+  }
+
+  .hero-lead {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    max-width: 100%;
   }
 
   .hero-actions {
     flex-direction: column;
     width: 100%;
+    gap: 0.65rem;
+    margin-bottom: 1.15rem;
   }
 
   .hero-actions .btn {
     width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.84rem;
   }
 
+  .hero-meta {
+    padding-top: 0.75rem;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hero-meta-val {
+    font-size: 0.95rem;
+  }
+
+  .hero-meta-lbl {
+    font-size: 0.625rem;
+  }
+
+  .hero-frame {
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 24px rgba(23, 21, 19, 0.08);
+  }
+
+  .hero-img-wrap {
+    aspect-ratio: 16 / 10;
+    width: 100%;
+  }
+
+  /* Section Headings H2 on Mobile: Strictly 30–34px */
+  .headline-lg,
+  .custom-furniture-title,
+  .whatsapp-banner-text h2 {
+    font-size: clamp(1.875rem, 2.5vw + 1.25rem, 2.125rem);
+    line-height: 1.18;
+  }
+
+  /* Header Proportions on Mobile */
   .brand-monogram {
     width: 34px;
     height: 34px;
@@ -2139,11 +2334,42 @@ textarea.form-control {
   }
 
   .brand-name-title {
-    font-size: 1.12rem;
+    font-size: 1.15rem;
   }
 
   .brand-tagline-sub {
     display: none;
+  }
+
+  .header-actions .btn {
+    width: 98px;
+    height: 34px;
+    padding: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Why Babulal Hallmark Grid on Mobile: clean vertical scanability */
+  .why-hallmark-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-hallmark-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(23, 21, 19, 0.06);
+    padding: 1.25rem 1rem;
+  }
+
+  .why-hallmark-item:last-child {
+    border-bottom: none;
   }
 
   .filter-tab {
@@ -2158,7 +2384,7 @@ textarea.form-control {
 
 @media (max-width: 360px) {
   .hero-headline {
-    font-size: 2.625rem; /* Exactly 42px on 360px viewport */
+    font-size: 2.375rem; /* Strictly 38px on 360px viewport */
   }
 
   .header-actions .btn {
@@ -2170,7 +2396,7 @@ textarea.form-control {
   }
 
   .product-card-title {
-    font-size: 0.92rem;
-    min-height: 2.56em;
+    font-size: 0.9375rem; /* 15px */
+    min-height: 2.5em;
   }
 }
