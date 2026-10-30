@@ -125,7 +125,7 @@ button {
 }
 
 /* ==========================================================================
-   3. TYPOGRAPHY SYSTEM
+   3. TYPOGRAPHY SYSTEM — EDITORIAL LUXURY SCALE
    ========================================================================== */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
@@ -136,45 +136,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .headline-xl {
-  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
   font-weight: 600;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
+/* Major Section Headings H2: Balanced, consistent, refined across all sections */
 .headline-lg {
-  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-size: clamp(2.15rem, 2.7vw, 2.65rem);
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
 }
 
 .headline-md {
-  font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+  font-size: clamp(1.45rem, 2.2vw, 1.95rem);
   font-weight: 600;
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .headline-sm {
-  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.18rem, 1.6vw, 1.45rem);
   font-weight: 600;
   line-height: 1.35;
 }
 
 .body-lg {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1.02rem;
+  line-height: 1.65;
   color: var(--text-muted);
 }
 
 .body-md {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text-muted);
 }
 
 .body-sm {
-  font-size: 0.82rem;
-  line-height: 1.5;
+  font-size: 0.86rem;
+  line-height: 1.55;
   color: var(--text-muted);
 }
 
@@ -436,15 +439,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-monogram {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   background-color: var(--bg-dark);
   color: var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.18rem;
   font-weight: 700;
   border-radius: var(--radius-xs);
   border: 1px solid var(--gold-accent);
@@ -470,15 +473,15 @@ h1, h2, h3, h4, h5, h6 {
 .brand-name-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0.06em;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
   line-height: 1;
   color: var(--text-dark);
 }
 
 .brand-tagline-sub {
   font-family: var(--font-body);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   color: var(--wood-brown);
@@ -674,9 +677,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-kicker {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--wood-brown);
   margin-bottom: 0.75rem;
@@ -695,17 +698,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4.25rem);
+  font-size: clamp(2.65rem, 3.8vw, 3.65rem);
   font-weight: 600;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-dark);
   margin-bottom: 1.25rem;
 }
 
 .hero-lead {
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
-  line-height: 1.7;
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  line-height: 1.65;
   color: var(--text-muted);
   margin-bottom: 2rem;
   max-width: 48ch;
@@ -915,7 +918,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card-kicker {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -925,11 +928,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-card-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.3;
   color: var(--text-dark);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
+  min-height: 2.6em;
   /* Line clamp so cards maintain consistent visual rhythm */
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -943,10 +947,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card-desc {
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 1.25rem;
+  line-height: 1.55;
+  margin-bottom: 1.15rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -1189,16 +1193,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .custom-furniture-title {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.2vw, 3.25rem);
+  font-size: clamp(2.15rem, 2.7vw, 2.65rem);
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
   margin-bottom: 1.25rem;
   color: var(--text-light);
 }
 
 .custom-furniture-lead {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1.02rem;
+  line-height: 1.65;
   color: var(--text-light-muted);
   margin-bottom: 2.25rem;
 }
@@ -1234,9 +1239,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .custom-pillar-desc {
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   color: var(--text-light-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .custom-furniture-media {
@@ -1315,9 +1320,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .workshop-feature-item p {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* ==========================================================================
@@ -1388,8 +1393,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .whatsapp-banner-text h2 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-size: clamp(2.15rem, 2.7vw, 2.65rem);
   font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
   color: var(--text-light);
   margin-bottom: 0.85rem;
 }
@@ -1418,32 +1425,37 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
-/* Floating WhatsApp Button */
+/* Floating WhatsApp Button — Subtle, Premium, Non-intrusive */
 .floating-whatsapp-btn {
   position: fixed;
-  bottom: 1.75rem;
-  right: 1.75rem;
-  width: 52px;
-  height: 52px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  width: 54px;
+  height: 54px;
   border-radius: var(--radius-full);
   background-color: #25D366;
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-  z-index: 150;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(37, 211, 102, 0.22);
+  z-index: 95;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .floating-whatsapp-btn:hover {
-  transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2), 0 3px 8px rgba(37, 211, 102, 0.3);
+}
+
+.floating-whatsapp-btn:active {
+  transform: scale(0.96);
 }
 
 .floating-whatsapp-btn svg {
-  width: 28px;
-  height: 28px;
+  width: 27px;
+  height: 27px;
+  display: block;
   fill: currentColor;
 }
 
@@ -1969,6 +1981,14 @@ textarea.form-control {
     --header-height: 64px;
   }
 
+  /* Section Headings Consistency on Mobile/Tablet */
+  .headline-lg,
+  .custom-furniture-title,
+  .whatsapp-banner-text h2 {
+    font-size: clamp(1.85rem, 5.2vw, 2.25rem);
+    line-height: 1.22;
+  }
+
   /* CRITICAL REQUIREMENT: Mobile product grid MUST display 2 PRODUCTS PER ROW */
   .featured-products-grid,
   .catalogue-products-grid {
@@ -1997,9 +2017,14 @@ textarea.form-control {
   }
 
   .product-card-title {
-    font-size: 0.95rem;
-    line-height: 1.25;
+    font-size: 0.96rem;
+    line-height: 1.28;
     margin-bottom: 0.25rem;
+    min-height: 2.56em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .product-card-desc {
@@ -2011,11 +2036,11 @@ textarea.form-control {
   }
 
   .product-card-pricing {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
   }
 
   .product-card-link {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
   }
 
   .product-card-link .material-symbols-outlined {
@@ -2077,22 +2102,25 @@ textarea.form-control {
     padding: 1.5rem 1.25rem;
   }
 
+  /* Refined Floating WhatsApp Button — Mobile 50px, safe-area aware */
   .floating-whatsapp-btn {
-    bottom: 1.25rem;
-    right: 1.25rem;
-    width: 48px;
-    height: 48px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    width: 50px;
+    height: 50px;
   }
 
   .floating-whatsapp-btn svg {
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
   }
 }
 
 @media (max-width: 480px) {
+  /* Hero Headline — Calibrated 42px to 48px across narrow mobile viewports */
   .hero-headline {
-    font-size: clamp(2rem, 9vw, 2.75rem);
+    font-size: clamp(2.625rem, 5vw + 1.5rem, 3rem);
+    line-height: 1.12;
   }
 
   .hero-actions {
@@ -2104,8 +2132,14 @@ textarea.form-control {
     width: 100%;
   }
 
+  .brand-monogram {
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
+  }
+
   .brand-name-title {
-    font-size: 1.15rem;
+    font-size: 1.12rem;
   }
 
   .brand-tagline-sub {
@@ -2123,6 +2157,10 @@ textarea.form-control {
 }
 
 @media (max-width: 360px) {
+  .hero-headline {
+    font-size: 2.625rem; /* Exactly 42px on 360px viewport */
+  }
+
   .header-actions .btn {
     display: none;
   }
@@ -2132,6 +2170,7 @@ textarea.form-control {
   }
 
   .product-card-title {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
+    min-height: 2.56em;
   }
 }
